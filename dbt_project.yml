@@ -1,0 +1,28 @@
+name: 'alma_marketing_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'alma_marketing_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  alma_marketing_analytics:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  alma_marketing_analytics:
+    +schema: main_raw

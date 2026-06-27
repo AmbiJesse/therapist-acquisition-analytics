@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: alma_raw
+    schema: main_raw # change from raw to main_raw
+    description: "Raw seed tables representing Alma's therapist acquisition data"
+    tables:
+      - name: therapist_signups
+        description: "One row per therapist who signed up for Alma"
+        columns:
+          - name: therapist_id
+            description: "Unique therapist identifier"
+            tests: [unique, not_null]
+          - name: referral_source
+            tests: [not_null, accepted_values: {values: [paid_search, organic, referral, partner, social]}]
+          - name: insurance_accepted
+            tests: [not_null]
+
+      - name: directory_sessions
+        description: "Patient sessions browsing therapist directory pages"
+        columns:
+          - name: session_id
+            tests: [unique, not_null]
+          - name: therapist_id
+            tests: [not_null, relationships: {to: ref('stg_signups'), field: therapist_id}]
+
+      - name: contact_requests
+        description: "Patient contact requests submitted to a therapist"
+        columns:
+          - name: request_id
+            tests: [unique, not_null]
+
+      - name: marketing_spend
+        description: "Weekly marketing spend by channel and campaign"
+        columns:
+          - name: spend_id
+            tests: [unique, not_null]
+          - name: spend_usd
+            tests: [not_null]
