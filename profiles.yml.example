@@ -1,0 +1,7 @@
+alma_marketing_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ./alma.duckdb
+      schema: main
