@@ -59,19 +59,21 @@ marts/
 
 ## The insight
 
-Running `analyses/insurance_acceptance_cac_correlation.sql` produces a channel comparison that flips the standard CAC ranking:
+Querying `mart_cac_by_channel` and `mart_therapist_growth` together surfaces a channel ranking that flips what raw CAC implies:
 
-| Channel | CAC (raw) | CAC (mission-adjusted) | Insurance rate | 6m retention |
-|---|---|---|---|---|
-| paid_search | ~$155 | ~$580 | 52% | 51% |
-| organic | ~$104 | ~$248 | 64% | 63% |
-| **referral** | **~$240** | **~$357** | **81%** | **79%** |
-| partner | ~$192 | ~$375 | 73% | 70% |
-| social | ~$261 | ~$812 | 44% | 40% |
+| Channel | Signups | Insurance rate | 6m retention |
+|---|---|---|---|
+| **referral** | **192** | **80%** | **83%** |
+| partner | 104 | 73% | 62% |
+| organic | 294 | 65% | 60% |
+| paid_search | 347 | 50% | 50% |
+| social | 63 | 33% | 41% |
 
-**Referral looks expensive on raw CAC. It's the cheapest channel once you adjust for mission.**
+**Referral is the highest-quality channel by every mission-relevant metric — and it's not close.**
 
-Paid search delivers ~2x the raw signups at lower nominal cost — but a referral therapist is 56% more likely to accept insurance and 55% more likely to still be active at 6 months. The mission-adjusted CAC tells a completely different story about where to allocate budget.
+Paid search drives the most raw signups (347 vs. referral's 192) but only half of those therapists accept insurance and half churn within 6 months. A referral therapist is 60% more likely to accept insurance and 66% more likely to still be active at 6 months. The implication: budget decisions made on signup volume alone systematically underinvest in the channel that best serves Alma's mission.
+
+The mart models make this comparison available on demand — sliced by week, cohort month, or state — rather than requiring a one-off analysis each time the question comes up.
 
 ---
 
